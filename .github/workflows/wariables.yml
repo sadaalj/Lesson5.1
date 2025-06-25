@@ -34,7 +34,7 @@ jobs:
           echo "this step runsa special script to clean up after the failed step"
           echo ${{ env.FORMAT_VAR}}
       - name: funtion and always status check
-        if: ${{ startWith(env.aString, 'this') && always() }}
+        if: ${{ startsWith(env.aString, 'this') && always() }}
         run: sleep 60
       - name: test cancel status check
         if: ${{ cancelled() }}
