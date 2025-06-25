@@ -1,0 +1,26 @@
+name: Variables and secrets
+
+env:
+  WF_VAR: "WorkFlow level variable"
+on:
+  push:
+
+jobs:
+  test_variables:
+    env: 
+      JOB_VAR: "Job level variable"
+    name: job to test variable
+    runs-on: ubuntu-latest
+    steps:
+      - name: test variables
+        id: stepVar
+        env:
+          STEP_VAR: "Step Level variable" 
+        run: |
+          echo ${{ github.actor}}
+          echo $GITHUB_JOB
+          echo $WF_VAR
+          echo $JOB_VAR
+          echo $STEP_VAR
+          echo $${{ vars.CONF_VAR}}
+          echo ${{ secrets.A_SECRET}}
