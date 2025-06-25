@@ -23,6 +23,6 @@ jobs:
           echo $STEP_VAR
           echo ${{ vars.CONF_VAR }}
           echo ${{ vars.CON_VAR }}
-          echo ${{ vars.A_SECRET }}
-          echo ${{ vars.A_SECRETUSED }}
+          echo ${{ secrets.A_SECRET }}
+          echo ${{ secrets.A_SECRETUSED }}
           
