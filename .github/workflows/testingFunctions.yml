@@ -1,0 +1,37 @@
+name: Variables and Functions
+
+env:
+  
+  WF_VAR: "workflow level variable"
+
+on:
+  push: 
+
+jobs:
+  test_expression: 
+    name: job to test expression
+    runs-on: ubuntu-latest
+    env: 
+      aBoolean: ${{false}}
+      aNull: ${{ null }}
+      aString: this is a string
+    steps:
+      - name: test null
+        if: (env.aNull == null)
+        run: echo this variable is null
+      - name: test boolean
+        if: ${{fromJSON(env.aBoolean) }}
+        run: echo this jon wont run as our variable is false
+      - name: contains function
+        if: ${{contains(env.aString, 'this')}}
+        run: |
+          echo our string var contains the word this
+          echos but here is a typo that will make this step fail
+      - name: test status check and format funtion
+        if: ${{ failure() }}
+        env:
+          FORMAT_VAR: ${{ format('Github {0} {1} {2}', 'actions', 'is', 'awesome!') }}
+        run: |
+          echo "this step run as special script to clean up after the failed step
+          echo ${{ env.FORMAT_VAR }}
+          
